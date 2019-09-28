@@ -1,0 +1,19 @@
+body{
+    background-image: url(../images/trivia.jpg);
+    background-size: 100%;
+    background-repeat:no-repeat;
+    margin-top: 200px;
+   
+
+}
+#page-wrap {
+    
+    height: 100%;
+    width: 500px;
+    margin: 0;
+    
+    color: white
+}
+#timer{
+    color: white;
+}
