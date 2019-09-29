@@ -1,4 +1,4 @@
-var counter = 60;
+var counter = 10;
 var currentQuestion = 0;
 var score = 0;
 var lost = 0;
@@ -11,10 +11,9 @@ $( document ).ready(function() {
 
   $(document).on("click", ".choice", function() {
     var userAnswer = $(this).attr("data-answer");
-    if (userAnswer === quizQuestions[currentQuestion].correctAnswer){
+    if(userAnswer === quizQuestions[currentQuestion].correctAnswer){
       score++;
-      clearInterval(interval);
-      
+      clearInterval(interval); 
     }else {
       lost++;
       clearInterval(interval);
@@ -24,6 +23,7 @@ $( document ).ready(function() {
     choices = quizQuestions[currentQuestion].choices;
     loadQuestion();
   })
+  
 loadQuestion();
 });
 
@@ -41,20 +41,14 @@ function loadQuestion() {
     $("#options").append(btn);
     $("#options").append("<br><br>")
   }
-  counter = 60;
+  counter = 10;
   interval = setInterval(countdown, 1000)
   
-  if (quizQuestions[counter]===quizQuestions.length ){
+  if ((quizQuestions.length-1) === currentQuestion){
     displayResult();
   }
 }
-
-
-
-
-
-
-// timer function
+//timer function
 function countdown() {
   counter--
   $("#timer").html("Time Remaining: " + counter);
@@ -69,6 +63,23 @@ function countdown() {
 }
 
 function displayResult(){
-  $("#options").text("You got " + score + " correct");
+  clearInterval(interval);
+  $("#timer").empty();
+  $("#game").empty();
+  $("#options").empty();
+  $("#game").text( "You got " + score + " questions correct");
+  $("#options").text( "You got " + lost + " questions incorrect");  
 }
 
+$("#reset").click(function(){
+  counter = 10;
+  currentQuestion = 0;
+  score = 0;
+  lost = 0;
+  interval;
+  
+  question = quizQuestions[currentQuestion].question;
+  choices = quizQuestions[currentQuestion].choices;
+  clearInterval(interval);
+  loadQuestion();
+});
